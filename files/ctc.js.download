@@ -1,0 +1,158 @@
+var _____WB$wombat$assign$function_____=function(name){return (globalThis._wb_wombat && globalThis._wb_wombat.local_init && globalThis._wb_wombat.local_init(name))||globalThis[name];};if(!globalThis.__WB_pmw){globalThis.__WB_pmw=function(obj){this.__WB_source=obj;return this;}}{
+let window = _____WB$wombat$assign$function_____("window");
+let self = _____WB$wombat$assign$function_____("self");
+let document = _____WB$wombat$assign$function_____("document");
+let location = _____WB$wombat$assign$function_____("location");
+let top = _____WB$wombat$assign$function_____("top");
+let parent = _____WB$wombat$assign$function_____("parent");
+let frames = _____WB$wombat$assign$function_____("frames");
+let opener = _____WB$wombat$assign$function_____("opener");
+// JavaScript Document
+
+	function handlePageEvent(type, value)
+	{
+		try
+		{
+		    //_gaq.push(['_trackEvent', type, value]);
+		    dcsMultiTrack('DCS.dcssip', 'www.cinnamontoastcrunch.com', 'DCS.dcsuri', value);
+		}
+		catch  (err)
+		{
+			//
+			if (console)
+			{
+				if (console.log)
+				{
+					console.log("error tracking event '" + type + "' " + err.toString());
+				}
+			}
+		}
+	}
+	
+	function injectRollovers() 
+	{
+	    if (!isIE6) {
+	        var ctr = 0;
+	        $('.rolloverdiv').each(function(e) 
+	        {
+	            var ht = $(this).html();
+	            var img = $(this).find('img');
+	            var span = $(this).find('span');
+	
+	            if (span.length == 0 && img.length > 0) 
+	            {
+	                var src = img.attr('src');
+	                var oversrc = src.replace("out.", "over.");
+	                var width = img.attr('width');
+	                var height = img.attr('height');
+	
+	                var roll = '<span class="rollover" style="width: ' + width + 'px; height: ' + height + 'px;">';
+	                roll += '<img src="' + oversrc + '" width="' + width + '" height="' + height + '" border="0" ';
+	
+	                if (isIE) {
+	                    roll += 'style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, ';
+	                    roll += 'sizingMethod=scale, src=\'' + oversrc + '\');" ';
+	                }
+	
+	                roll += '/></span>';
+	
+	                $(this).find('a').prepend(roll);
+	            }
+	        });
+	    }
+	}
+
+	function prepRollovers()
+	{
+		$(".rollover").css({'opacity':'0.0', 'visibility':'visible'});
+		
+		$('.rolloverdiv').hover(
+			function() 
+			{
+				$(this).find('.rollover').stop().fadeTo(150, 0.99);
+			},
+			function() 
+			{
+				$(this).find('.rollover').stop().fadeTo(150, 0.0);
+			}
+		);
+	}
+	
+	function prepIERollovers()
+	{
+		$(".rollover").hide();
+		
+		$('.rolloverdiv a img').hover(
+			function() 
+			{
+				this.src = this.src.replace("_out","_over");
+			},
+			function() 
+			{
+				this.src = this.src.replace("_over","_out");
+			}
+		);
+	}
+	
+	var flashVersion = 0;
+	
+	$(document).ready(function() 
+	{
+		if (!isIE6)
+		{
+			flashVersion = swfobject.getFlashPlayerVersion()["major"];
+			
+			if (flashVersion >= 8)
+			{
+				$('#flashbowl').html('<div id="bowldiv" class="innerflashbowl"></div>');
+				$('#flashbowl').css('height', '170');	
+				$('#flashbowl').css('width', '100%');	
+				$('#thebowl').css('background', 'none');
+				$('#thebowlinner').css('background', 'none');
+				$('#topnavouter').css('background', 'none');
+				$('#topnavouter').css('backgroundColor', '#ffffff');
+				
+				var flashvars = {
+				};
+				var params = {
+				wmode: "transparent",
+				scale: "noscale",
+				background: "#ffffff"
+				};
+				var attributes = {
+				id: "bowldiv",
+				name: "bowldiv"
+				};
+				
+				swfobject.embedSWF("assets/swfs/milkbowl.swf", "bowldiv", "100%", "170", "9.0.0", false, flashvars, params, attributes);
+			}
+		}
+		
+		injectRollovers();
+		
+		if (isIE7 || isIE6 || isIE8) 
+		{
+			prepIERollovers();
+		}
+		else
+		{
+			prepRollovers();
+		}
+	});
+}
+
+/*
+     FILE ARCHIVED ON 02:47:03 Aug 03, 2015 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 22:44:38 Aug 23, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  capture_cache.get: 7.69
+  load_resource: 3135.984
+  PetaboxLoader3.resolve: 3113.224
+  PetaboxLoader3.datanode: 22.278
+*/
